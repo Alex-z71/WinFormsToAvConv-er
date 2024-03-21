@@ -1,23 +1,16 @@
-# WinFormsToAvConv-er
+# WinForms2AvaloniaConverter
 
-The converter allows you to convert a Windows Forms project to an Avalonia UI project. It performs conversion of UI controls, business logic, images aresources and localization resources.
+The converter allows you to convert a Windows Forms project to an Avalonia UI project. It also allows you to convert individual files instead of entire projects.
 
-It uses Eremex Avalonia UI controls as a replacement for standard and third-party WinForms controls.
-
-The converter allows you to migrate invdividual files and projects to Avalonia UI.
-
-## 
+WinForms2AvaloniaConverter converts UI controls according to your rules, extracts and transfers images and localization resources, and also ______moves business logic bound to the UI controls________ ???????????????????
 
 
-## Convert Individual Files
+## Convert Individual Files or Projects
 
-Converting individual files is handy for large projects that consist of, say, hundreds of forms.
-+ Удобны при отладке конвертера ----??????
-After conversion, you need to manually add converted files to your Avalonia project.
+Converting individual files is handy for large projects that consist of, say, hundreds of forms. You can iteratively convert files, check the result and then safely move the converted files to your destination project.
+Use individual file conversion to test the converter.
 
-## Convert Projects
-
-For small projects, you can use the converter to convert the entire pproject. 
+For small projects, you can use the converter to convert the entire project. After the conversion you may need to refine the application's code and ______configuration__________????
 - Сложнее сочетать создание проекта с его ручной доводкой   ----??????
 
 ## What Files are Converted?
@@ -33,10 +26,13 @@ Localized resources: *.<Localized>.resx -> *.<Localized>.resx
 - Creates a layout of controls
 - Creates properties in View Modesl and binds them to a View's controls
 
-## How the Converter Works
 
-The converter uses the Visitor pattern to recursively iterate through the Controls collection of Form and UserControl objects in the source application. During the iteration through controls, it collects information about the names, position, size of the controls and 
-_________свойства данных___.?????
+
+
+
+## How the Converter Works
+The Converter analyzes the source application's Forms that you open at runtime. It recursively iterates through the Controls collection of opened Forms, and collects information about the names, position, size of the controls and _____their properties______.
+_________свойства данных___.????? Once data is collected, 
   
 ## Get Started with Project Conversion
 
@@ -56,3 +52,7 @@ _________свойства данных___.?????
 
 ...
 - Access the result of the conversion in the `./Bin/../Converted` folder, and then copy the converted files to the destination project.
+
+## UI Control Conversion
+
+It uses Eremex Avalonia UI controls as a replacement for standard and third-party WinForms controls.
