@@ -23,10 +23,12 @@ WinForms *.cs, *.Design.cs files are converted to Avalonia UI *.axaml, *.axaml.c
 During the conversion, the converter extracts the business logic from the source WinForms files and moves it to separate *.cs files.
 
 **Resources**
+
 The *.resx files are converted to Avalonia UI format.
 
 **Localized resources**
-The *.<Localized>.resx files are converted to Avalonia UI format.
+
+The *./<Localized/>.resx files are converted to Avalonia UI format.
 
 - Creates files that encapsulate Views and View Models
 - Extracts localization resources
