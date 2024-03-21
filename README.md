@@ -23,9 +23,9 @@ For small projects, you can use the converter to convert the entire pproject.
 ## What Files are Converted?
 The converter converts Winforms-specific files to Avalonia UI-specific files. During the conversion, the converter extracts the business logic from the source WinForms files and moves it to separate Avalonia *.cs files.
 
-- *.cs, *.Design.cs -> *.axaml, *.axaml.cs, and *.cs (View Model)
-- *.resx -> *.resx
-- *.<Localized>.resx -> *.<Localized>.resx
+UI and business logic: *.cs, *.Design.cs -> *.axaml, *.axaml.cs, and *.cs (View Model)
+Resources: *.resx -> *.resx
+Localized resources: *.<Localized>.resx -> *.<Localized>.resx
 
 - Creates files that encapsulate Views and View Models
 - Extracts localization resources
