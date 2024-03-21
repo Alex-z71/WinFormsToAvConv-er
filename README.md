@@ -14,9 +14,15 @@ For small projects, you can use the converter to convert the entire project. Aft
 - Сложнее сочетать создание проекта с его ручной доводкой   ----??????
 
 ## What Files are Converted?
-The converter converts WinForms-specific files to Avalonia UI-specific files. During the conversion, the converter extracts the business logic from the source WinForms files and moves it to separate Avalonia *.cs files.
+The converter converts WinForms-specific files to Avalonia UI-specific files. During the conversion, the converter extracts the business logic from the source WinForms files and moves it to separate *.cs files.
 
-UI and business logic: *.cs, *.Design.cs -> *.axaml, *.axaml.cs, and *.cs (View Model)
+|  | WinForms files    | Avalonia UI files  |
+| :---:   | :---: | :---: |
+| UI and business logic | *.cs, *.Design.cs   | *.axaml, *.axaml.cs, and *.cs (View Model)   |
+| Resources | *.resx   | *.resx   |
+| Localized resources | *.<Localized>.resx   | *.<Localized>.resx   |
+
+UI and business logic: WinForms *.cs, *.Design.cs files -> *.axaml, *.axaml.cs, and *.cs (View Model)
 Resources: *.resx -> *.resx
 Localized resources: *.<Localized>.resx -> *.<Localized>.resx
 
