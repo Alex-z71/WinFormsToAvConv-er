@@ -4,11 +4,28 @@ The converter allows you to convert a Windows Forms application to an Avalonia U
 
 It uses Eremex Avalonia UI controls as a replacement for standard and third-party WinForms controls.
 
-The converter converts Winforms-specific files to Avalonia-specific files.
+The converter allows you to migrate invdividual files and projects to Avalonia UI.
 
-*.cs, *.Design.cs -> *.axaml, *.axaml.cs and *.cs (View Model)
-*.resx -> *.resx
-*.<Localized>.resx -> *.<Localized>.resx
+## 
+
+
+## Convert Individual Files
+
+Converting individual files is handy for large projects that consist of, say, hundreds of forms.
++ Удобны при отладке конвертера ----??????
+After conversion, you need to manually add converted files to your Avalonia project.
+
+## Convert Projects
+
+For small projects, you can use the converter to convert the entire pproject. 
+- Сложнее сочетать создание проекта с его ручной доводкой   ----??????
+
+## What Files are Converted?
+The converter converts Winforms-specific files to Avalonia UI-specific files. During the conversion, the converter extracts the business logic from the source WinForms files and moves it to separate Avalonia *.cs files.
+
+- *.cs, *.Design.cs -> *.axaml, *.axaml.cs, and *.cs (View Model)
+- *.resx -> *.resx
+- *.<Localized>.resx -> *.<Localized>.resx
 
 - Creates files that encapsulate Views and View Models
 - Extracts localization resources
