@@ -1,6 +1,6 @@
 # WinFormsToAvConv-er
 
-The converter allows you to convert a Windows Forms application to an Avalonia UI application. 
+The converter allows you to convert a Windows Forms project to an Avalonia UI project. It performs conversion of UI controls, business logic, resourced and localization resources.
 
 It uses Eremex Avalonia UI controls as a replacement for standard and third-party WinForms controls.
 
@@ -34,3 +34,21 @@ Localized resources: *.<Localized>.resx -> *.<Localized>.resx
 - Creates properties in View Modesl and binds them to a View's controls
 
   
+## Get Started with Project Conversion
+
+1. Download and then open the WinForms2AvaloniaConverter project in Visual Studio.
+2. Customize mapping rules for types and namespaces according to your needs.
+3. Compile the WinForms2AvaloniaConverter library, or create a NuGet package for the WinForms2AvaloniaConverter library.
+4. Include the created library/NuGet package into your project that needs to be converted. Alternatively, you can include the source files of the WinForms2AvaloniaConverter library into your project.
+5. In your project, inherit all `System.Windows.Forms.Form` objects from the `WAConverter.WAForm` class, and inherit all `System.Windows.Forms.UserControl` objects from the `WAConverter.UserControl` class.
+6. Run your application.
+7. Open all forms and user controls at runtime, so the converter can analyze them.
+8. Copy code that was not converted to the destination project.
+   
+- куда попадает результат конвертации
+- 
+
+## Get Started with Individual Project Conversion
+
+...
+- Access the result of the conversion in the `./Bin/../Converted` folder, and then copy the converted files to the destination project.
