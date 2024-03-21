@@ -25,7 +25,7 @@ For small projects, you can use the Converter to convert the entire project. Aft
 5. In your project, inherit all `System.Windows.Forms.Form` objects from the `WAConverter.WAForm` class, and inherit all `System.Windows.Forms.UserControl` objects from the `WAConverter.UserControl` class.
 6. Run your application.
 7. Open all forms and user controls at runtime, so the converter can analyze them.
-8. Copy code that was not converted to the destination project.
+8. Copy code that was skipped during converted to the destination project.
    
 - куда попадает результат конвертации
 - 
