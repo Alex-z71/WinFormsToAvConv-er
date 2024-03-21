@@ -11,7 +11,7 @@ _________свойства данных___.????? Once data is collected, it gener
 ## Convert Individual Files or Projects
 
 Converting individual files is handy for large projects that consist of, say, hundreds of forms. You can iteratively convert files, check the result and then safely move the converted files to your destination project.
-Use individual file conversion to test the converter.
+Also, use individual file conversion to test the converter.
 
 For small projects, you can use the converter to convert the entire project. After the conversion you may need to refine the application's code and ______configuration__________????
 - Сложнее сочетать создание проекта с его ручной доводкой   ----??????
