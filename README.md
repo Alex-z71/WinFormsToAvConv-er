@@ -4,7 +4,7 @@ The Converter allows you to convert a Windows Forms project to an Avalonia UI pr
 
 WinForms2AvaloniaConverter converts UI controls according to your control mapping rules, generates View and View Model classes, transfers images and localization resources, and also extracts ______business logic bound to the UI controls________ ???????????????????
 
-The Converter analyzes the source application's Forms that you open at runtime. It recursively iterates through the Controls collection of opened Forms, and collects information about the names, position, size of the controls and _____their properties______.
+The Converter analyzes the source application's Forms at runtime. It recursively iterates through the Controls collection of opened Forms, and collects information about the names, position, size of the controls and _____their properties______.
 _________свойства данных___.????? Once data is collected, it generates the destination project/files.
 
 
