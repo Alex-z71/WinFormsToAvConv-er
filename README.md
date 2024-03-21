@@ -11,7 +11,7 @@ _________свойства данных___.????? Once data is collected, it gener
 ## Convert Individual Files or Projects
 
 Converting individual files is handy for large projects that consist of, say, hundreds of forms. You can iteratively convert files, check the result and then safely move the converted files to your destination project.
-Also, use individual file conversion to test the converter.
+Also, you can use individual file conversion to test the converter.
 
 For small projects, you can use the converter to convert the entire project. After the conversion you may need to refine the application's code and ______configuration__________????
 - Сложнее сочетать создание проекта с его ручной доводкой   ----??????
@@ -19,13 +19,16 @@ For small projects, you can use the converter to convert the entire project. Aft
 ## Converting UI and Business Logic
 
 _____WinForms *.cs and *.Design.cs____
-откуда конвертер знает про файлы, если он щапускается в рантайме????????????????
+откуда конвертер знает про файлы, если он запускается в рантайме????????????????
 files are converted to Avalonia UI *.axaml, *.axaml.cs, and *.cs files.
 
 View classes are created for Form and UserControl classes. During the conversion, the converter extracts the business logic from the source WinForms files, and generates *.cs files that contain View Models implementing this logic.
 
 The converter uses customizable control mapping rules that determine which controls to convert to which controls. You need to adjust these rules to perform the correct conversion.
 
+The converter analyzes the position and size of controls in the source application, and creates a corresponding layout of the controls in the destination project/files.
+
+If controls are bound in the source file, the Converter binds the destination control to a correposnding property in a View Model.
 
 ## Converting Resources
 
