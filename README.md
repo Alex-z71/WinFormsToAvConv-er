@@ -2,7 +2,10 @@
 
 The converter allows you to convert a Windows Forms project to an Avalonia UI project. It also allows you to convert individual files instead of entire projects.
 
-WinForms2AvaloniaConverter converts UI controls according to your rules, extracts and transfers images and localization resources, and also ______moves business logic bound to the UI controls________ ???????????????????
+WinForms2AvaloniaConverter converts UI controls according to your control mapping rules, generates View and View Model classes, transfers images and localization resources, and also extracts ______business logic bound to the UI controls________ ???????????????????
+
+The converter analyzes the source application's Forms that you open at runtime. It recursively iterates through the Controls collection of opened Forms, and collects information about the names, position, size of the controls and _____their properties______.
+_________свойства данных___.????? Once data is collected, it generates the destination project/files.
 
 
 ## Convert Individual Files or Projects
@@ -13,21 +16,24 @@ Use individual file conversion to test the converter.
 For small projects, you can use the converter to convert the entire project. After the conversion you may need to refine the application's code and ______configuration__________????
 - Сложнее сочетать создание проекта с его ручной доводкой   ----??????
 
-## What Files are Converted?
+## Converting UI and Business Logic
 
-**UI and business logic**
-
-WinForms *.cs and *.Design.cs files are converted to Avalonia UI *.axaml, *.axaml.cs, and *.cs files.
+_____WinForms *.cs and *.Design.cs____
+откуда конвертер знает про файлы, если он щапускается в рантайме????????????????
+files are converted to Avalonia UI *.axaml, *.axaml.cs, and *.cs files.
 
 View classes are created for Form and UserControl classes. During the conversion, the converter extracts the business logic from the source WinForms files, and generates *.cs files that contain View Models implementing this logic.
 
-**Resources**
+The converter uses customizable control mapping rules that determine which controls to convert to which controls. You need to adjust these rules to perform the correct conversion.
 
-The *.resx files are processed to transfer text properties of controls. Extra properties (for instance, Name, Parent, ZOrder, and Type) saved in source *.resx files are skipped.
+
+## Converting Resources
+
+The *.resx files are processed to transfer text properties of controls. The "Text" and "Caption" properties are transferred by default, while other properties (for instance, Name, Parent, ZOrder, and Type) saved in source *.resx files are skipped.
 
 The converter extracts images stored in *.resx files and saves them as standalone image files in the destination folder.
 
-**Localized resources**
+## Converting Localized Resources
 
 The *.&lt;Localized&gt;.resx files are converted to _________Avalonia UI format_________ ??????????
 
@@ -38,9 +44,6 @@ The *.&lt;Localized&gt;.resx files are converted to _________Avalonia UI format_
 
 
 
-## How the Converter Works
-The Converter analyzes the source application's Forms that you open at runtime. It recursively iterates through the Controls collection of opened Forms, and collects information about the names, position, size of the controls and _____their properties______.
-_________свойства данных___.????? Once data is collected, 
   
 ## Get Started with Project Conversion
 
