@@ -19,13 +19,13 @@ For small projects, you can use the converter to convert the entire project. Aft
 
 WinForms *.cs and *.Design.cs files are converted to Avalonia UI *.axaml, *.axaml.cs, and *.cs files.
 
-View classes are created for Forms and UserControl classes. During the conversion, the converter extracts the business logic from the source WinForms files and generates View Model classes in *.cs files containing this logic.
+View classes are created for Form and UserControl classes. During the conversion, the converter extracts the business logic from the source WinForms files, and generates *.cs files that contain View Models implementing this logic.
 
 **Resources**
 
-The *.resx files are converted to _________Avalonia UI format_________ ??????????. 
+The *.resx files are processed to transfer text properties of controls. Extra properties (for instance, Name, Parent, ZOrder, and Type) saved in source *.resx files are skipped.
 
-The converter extracts images stored in *.resx files and saves them as image files to the destination folder.
+The converter extracts images stored in *.resx files and saves them as standalone image files in the destination folder.
 
 **Localized resources**
 
