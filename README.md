@@ -1,6 +1,6 @@
 # WinForms2AvaloniaConverter
 
-The Converter allows you to convert a Windows Forms project to an Avalonia UI project. It also allows you to convert individual files instead of entire projects.
+The Converter allows you to convert a Windows Forms project to an Avalonia UI project. It can also convert individual files instead of entire projects.
 
 WinForms2AvaloniaConverter converts UI controls according to your control mapping rules, generates View and View Model classes, transfers images and localization resources, and also extracts ______business logic bound to the UI controls________ ???????????????????
 
