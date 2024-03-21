@@ -49,12 +49,12 @@ According to the position and size of controls in the source application, the Co
 
 _________If controls are bound in the source file, the Converter binds the destination control to a correposnding property in a View Model.___________
 
-The _XamlConverter_ class defines control mapping rules. It maps common WinForms controls to Eremex Avalonia UI and standard Avalonia UI controls by default. You typically need to modify these rules to adapt them to the controls used in your source project.
-Use the _XamlConverter.typesMapping_ dictionary to map source controls to destination controls. Use the _XamlConverterюignoredControls_ property to specify a list of controls ignored during the conversion. For instance, this list contains the HScrollBar and VScrollBar controls, by default.
+The `XamlConverter` class defines control mapping rules. It maps common WinForms controls to Eremex Avalonia UI and standard Avalonia UI controls by default. You typically need to modify these rules to adapt them to the controls used in your source project.
+Use the `XamlConverter.typesMapping` dictionary to map source controls to destination controls. Use the `XamlConverter.ignoredControls` property to specify a list of controls ignored during the conversion. For instance, this list contains the `HScrollBar` and `VScrollBar` controls, by default.
 
 ## Converting Resources
 
-The *.resx files are processed to transfer text properties of controls. The ___________"Text" and "Caption"__________ properties are transferred by default, while other properties ("Name", "Parent", "ZOrder", and "Type") saved in source *.resx files are skipped. See the _ResXCleaner.ignoredProperties_ member to customize this setting.
+The *.resx files are processed to transfer text properties of controls. The ___________`Text` and `Caption`__________ properties are transferred by default, while other properties (`Name`, `Parent`, `ZOrder`, and `Type`) saved in source *.resx files are skipped. See the `ResXCleaner.ignoredProperties` member to customize this setting.
 
 The converter extracts images stored in *.resx files and saves them as standalone image files in the destination folder.
 
