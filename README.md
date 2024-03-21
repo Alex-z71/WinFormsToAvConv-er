@@ -42,12 +42,13 @@ _____WinForms *.cs and *.Design.cs____
 files are converted to Avalonia UI *.axaml, *.axaml.cs, and *.cs files.
 
 View classes are created for Form and UserControl classes. During the conversion, the Converter extracts the business logic from the source WinForms files, and generates *.cs files that contain View Models implementing this logic.
+_________If a source control is bound, the Converter binds the destination control to a correposnding property in a View Model.___________
 
 The Converter uses customizable control mapping rules that determine which controls to convert to which controls. You need to adjust these rules to perform the correct conversion.
 
 According to the position and size of controls in the source application, the Converter creates a corresponding layout of controls in the destination project/files.
 
-_________If controls are bound in the source file, the Converter binds the destination control to a correposnding property in a View Model.___________
+
 
 The `XamlConverter` class defines control mapping rules. It maps common WinForms controls to Eremex Avalonia UI and standard Avalonia UI controls by default. You typically need to modify these rules to adapt them to the controls used in your source project.
 Use the `XamlConverter.typesMapping` dictionary to map source controls to destination controls. Use the `XamlConverter.ignoredControls` property to specify a list of controls ignored during the conversion. For instance, this list contains the `HScrollBar` and `VScrollBar` controls, by default.
