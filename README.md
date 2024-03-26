@@ -1,66 +1,89 @@
 # WinForms2AvaloniaConverter
 
-The Converter allows you to convert a Windows Forms project to an Avalonia UI project. It can also convert individual files instead of entire projects.
+WinForms2AvaloniaConverter helps you migrate a Windows Forms project to an Avalonia UI project. It can convert entire projects or individual files.
 
-WinForms2AvaloniaConverter converts UI controls according to your control mapping rules, generates View and View Model classes, transfers images and localization resources, and also extracts ______business logic bound to the UI controls________ ???????????????????
+The converter migrates WinForms UI controls found in the source project to Eremex Avalonia UI and standard Avalonia UI counterparts. You can customize the converter to change control mapping.
 
-The Converter analyzes the source application's Forms at runtime. It recursively iterates through the Controls collection of opened Forms, and collects information about the names, position, size of the controls and _____their properties______.
-_________свойства данных___.????? Once data is collected, it generates the destination project/files.
+The converter provides the following project migration features:
 
+- Uses specified control mapping rules to convert source WinForms controls to Eremex Avalonia UI and standard Avalonia UI controls. 
+- Separates definition of source Form and UserControl classes into View and View Model classes according to the MVVM design pattern. Creates corresponding files in the destination project/folder.
+- Creates observable properties and commands in View Models (using the CommunityToolkit.Mvvm library), and binds generated Avalonia UI controls to them.
+- Copies resources from the source project to the destination project/folder.
+- Extracts images from resource files in the source project, and saves them to the destination project/folder.
 
-## Convert Individual Files or Projects
+The converter does not transfer business logic from code-behind, nor does it transfer code from additional *.cs files in the source project. You need to copy this code manually to the Avalonia project.
 
-Converting individual files is handy for large projects that consist of, say, hundreds of forms. You can iteratively convert files, check the result and then safely move the converted files to your destination project.
-Also, you can use individual file conversion to test the converter.
+## Convert Projects or Individual Files
 
-For small projects, you can use the Converter to convert the entire project. After the conversion you may need to refine the application's code and ______configuration__________????
-- Сложнее сочетать создание проекта с его ручной доводкой   ----??????
+For small projects that consist of a few forms, you can use the converter to migrate the entire project. Small projects are easier to check after conversion.
+
+Conversion of individual files is handy for large projects that consist of a multitude of forms. You can iteratively convert forms one by one: port a specific form(s), move the converted files to the target Avalonia UI project, check the result of conversion, and then continue converting other forms.
+
+Conversion of individual files is also useful for testing the converter.
 
 ## Get Started with Project Conversion
 
 1. Download and then open the WinForms2AvaloniaConverter project in Visual Studio.
-2. Customize mapping rules for types and namespaces used in your source project according to your needs, as described in [Converting UI and Business Logic](#Converting-UI-and-Business-Logic)
-3. Compile the WinForms2AvaloniaConverter library, or create a NuGet package for the WinForms2AvaloniaConverter library.
-4. Include the created library/NuGet package into your project that needs to be converted. Alternatively, you can include the source files of the WinForms2AvaloniaConverter library into your project.
-5. In your project, inherit all `System.Windows.Forms.Form` objects from the `WAConverter.WAForm` class, and inherit all `System.Windows.Forms.UserControl` objects from the `WAConverter.UserControl` class.
-6. Run your application.
-7. Open all forms and user controls at runtime, so the converter can analyze them.
-8. Copy code that was skipped during conversion to the destination project.
+2. Customize control mapping rules for Windows Forms controls used in your source project, as described in [Converting UI and Creating View Models](#converting-ui-and-creating-view-models).
+3. Specify the target Avalonia UI framework version using the `XamlConverter.avaloniaVersion` property.
+4. Specify the target version of the Eremex Avalonia UI controls using the `XamlConverter.controlsVersion` property.
+5. Build the WinForms2AvaloniaConverter library, or create a NuGet package for the WinForms2AvaloniaConverter library.
+6. Include the created library/NuGet package into your WinForms project that needs to be converted. Alternatively, you can include the source files of the WinForms2AvaloniaConverter library into your project.
+7. In your project, inherit all `System.Windows.Forms.Form` objects from the `WAConverter.WAForm` class, and inherit all `System.Windows.Forms.UserControl` objects from the `WAConverter.UserControl` class.
+8. Run the project.
+9. Open all forms one by one at runtime, so the converter can analyze them. The converter recursively iterates through the Controls collection of each opened Form, and collects information about the names, position, size of the controls and their properties. After data is collected, it generates Avalonia UI files in the destination folder (see `./Bin/../Converted`).
+10. Copy code that was skipped during conversion to the destination project.
+11. Test the project.
    
-- куда попадает результат конвертации
-- 
 
-## Get Started with Individual Project Conversion
+## Converting UI and Creating View Models
 
-...
-- Access the result of the conversion in the `./Bin/../Converted` folder, and then copy the converted files to the destination project.
+### Views
 
-## Converting UI and Business Logic
+For source WinForms Form and UserControl classes, the converter generates View classes in the _*.axaml_ and _*.axaml.cs_ files. The names of the source forms and user controls determine the names of generated View classes and files.
 
-_____WinForms *.cs and *.Design.cs____
-откуда конвертер знает про файлы, если он запускается в рантайме????????????????
-files are converted to Avalonia UI *.axaml, *.axaml.cs, and *.cs files.
+WinForms controls nested in source forms and user controls are converted to Eremex Avalonia UI and standard Avalonia UI counterparts by default. You can modify the `XamlConverter` class to adapt the conversion rules to your WinForms project.
 
-View classes are created for Form and UserControl classes. During the conversion, the Converter extracts the business logic from the source WinForms files, and generates *.cs files that contain View Models implementing this logic.
-_________If a source control is bound, the Converter binds the destination control to a correposnding property in a View Model.___________
+#### Related API
 
-The Converter uses customizable control mapping rules that determine which controls to convert to which controls. You need to adjust these rules to perform the correct conversion.
+- `XamlConverter.typesMapping` dictionary (initialized in the `XamlConverter.InitTypeMapping` method) — Use this member to customize control mapping rules according to your requirements. 
+- `XamlConverter.ignoredControls` property — Specifies a list of controls ignored during the conversion. For instance, this list contains the `HScrollBar` and `VScrollBar` controls, by default.
+- `XamlConverter.ConvertControlCore` — Implements generation of XAML attributes for Avalonia UI controls.
 
-According to the position and size of controls in the source application, the Converter creates a corresponding layout of controls in the destination project/files.
+Avalonia UI does not support control positioning using absolute coordinates. **During conversion, controls are placed in a `StackPanel` container.**
+
+### View Models
+
+Beside Views, the converter creates View Models in _*.cs_ files for **Forms and UserControls**. The View Models define commands (`RelayCommand`) for clickable controls (buttons), and observable properties that should provide data for specific controls.
+
+UI controls in View classes contain bindings to the commands and observable properties defined in View Models.
+
+#### Related API
+
+- `XamlConverter.GenerateFields` — Creates observable properties for specific Avalonia UI controls.
+- `XamlConverter.GenerateMethods` — Generates commands in View Models.
+- `XamlConverter.IsCommandControl` —  Specifies controls for which commands are generated.
 
 
+## Processing and Copying Resources
 
-The `XamlConverter` class defines control mapping rules. It maps common WinForms controls to Eremex Avalonia UI and standard Avalonia UI controls by default. You typically need to modify these rules to adapt them to the controls used in your source project.
-Use the `XamlConverter.typesMapping` dictionary to map source controls to destination controls. Use the `XamlConverter.ignoredControls` property to specify a list of controls ignored during the conversion. For instance, this list contains the `HScrollBar` and `VScrollBar` controls, by default.
+The converter searches for resources (_&ast;.resx_ files) and localization resources (_&ast;.&lt;Localized&gt;.resx_ files) in the source project's directory, and then copies found files to the destination folder. 
 
-## Converting Resources
+When copying resource files, a cleanup function keeps only **specific data properties** (`Text` and `Caption`), and skips irrelevant properties (`Name`, `Parent`, `ZOrder`, and `Type`).
 
-The *.resx files are processed to transfer text properties of controls. The ___________`Text` and `Caption`__________ properties are transferred by default, while other properties (`Name`, `Parent`, `ZOrder`, and `Type`) saved in source *.resx files are skipped. See the `ResXCleaner.ignoredProperties` member to customize this setting.
+In WinForms, images are typically stored within _.resx_ files in binary format. The converter extracts these images from .resx files and saves them as standalone image files in the destination folder.
 
-The converter extracts images stored in *.resx files and saves them as standalone image files in the destination folder.
+#### Related API
 
-## Converting Localized Resources
+- `XamlConverter.AddResXFiles` — Copies _*.resx_ files to the destination folder.
+- `ResXCleaner.CleanupFile` — Extracts images from a _*.resx_ file in the destination folder and saves them as standalone image files. Removes irrelevant properties from the _*.resx_ file.
+- `ResXCleaner.ignoredProperties` — Specifies a list of irrelevant properties removed by a cleanup function from _*.resx_ files in the destination folder.
 
-The *.&lt;Localized&gt;.resx files are converted to _________Avalonia UI format_________ ??????????
+## Customize Avalonia UI Project Template
 
-  
+The `AppTemplate` folder of the WinForms2AvaloniaConverter project contains files that define the template used to generate an Avalonia UI project. The template's files are stored as Embedded Resources. You can modify the template to suit your requirements.
+
+#### Related API
+
+- `XamlConverter.CreateAppFromTemplate` — Generates an Avalonia UI project from the project template.
