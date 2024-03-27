@@ -73,7 +73,7 @@ The converter searches for resources (_&ast;.resx_ files) and localization resou
 
 When copying resource files, a cleanup function keeps only specific data properties (`Text` and `Caption`), and skips irrelevant properties (`Name`, `Parent`, `ZOrder`, and `Type`).
 
-In WinForms, images are typically stored within _.resx_ files in binary format. The converter extracts these images from .resx files and saves them as standalone image files in the destination folder.
+In WinForms, images are typically stored within _.resx_ files in binary format. The converter extracts these images from _.resx_ files and saves them as standalone image files in the destination folder.
 
 #### Related API
 
