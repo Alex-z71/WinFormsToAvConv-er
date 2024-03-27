@@ -51,11 +51,12 @@ WinForms controls nested in source forms and user controls are converted to Erem
 - `XamlConverter.ignoredControls` property — Specifies a list of controls ignored during the conversion. For instance, this list contains the `HScrollBar` and `VScrollBar` controls, by default.
 - `XamlConverter.ConvertControlCore` — Implements generation of XAML attributes for Avalonia UI controls.
 
-Avalonia UI does not support control positioning using absolute coordinates. **During conversion, controls are placed in a `StackPanel` container.**
+Avalonia UI does not support control positioning using absolute coordinates. 
+During conversion, the `System.Windows.Forms.TableLayoutPanel` container is converted to the `Avalonia.Controls.Grid` container. Controls positioned within `TableLayoutPanel` cells are placed within corresponding `Grid` cells. All other controls are combined in the `StackPanel` container.
 
 ### View Models
 
-Beside Views, the converter creates View Models in _*.cs_ files for **Forms and UserControls**. The View Models define commands (`RelayCommand`) for clickable controls (buttons), and observable properties that should provide data for specific controls.
+Beside Views, the converter creates View Models in _*.cs_ files for Forms and UserControls. The View Models define commands (`RelayCommand`) for clickable controls (buttons), and observable properties that should provide data for specific controls.
 
 UI controls in View classes contain bindings to the commands and observable properties defined in View Models.
 
@@ -70,7 +71,7 @@ UI controls in View classes contain bindings to the commands and observable prop
 
 The converter searches for resources (_&ast;.resx_ files) and localization resources (_&ast;.&lt;Localized&gt;.resx_ files) in the source project's directory, and then copies found files to the destination folder. 
 
-When copying resource files, a cleanup function keeps only **specific data properties** (`Text` and `Caption`), and skips irrelevant properties (`Name`, `Parent`, `ZOrder`, and `Type`).
+When copying resource files, a cleanup function keeps only specific data properties (`Text` and `Caption`), and skips irrelevant properties (`Name`, `Parent`, `ZOrder`, and `Type`).
 
 In WinForms, images are typically stored within _.resx_ files in binary format. The converter extracts these images from .resx files and saves them as standalone image files in the destination folder.
 
