@@ -12,7 +12,7 @@ The converter provides the following project migration features:
 - Copies resources from the source project to the destination project/folder.
 - Extracts images from resource files in the source project, and saves them to the destination project/folder.
 
-The converter does not transfer business logic from code-behind, nor does it transfer code from additional *.cs files in the source project. You need to copy this code manually to the Avalonia project.
+The converter does not transfer business logic from code-behind, nor does it transfer code from additional _*.cs_ files in the source project. You need to copy this code manually to the Avalonia project.
 
 ## Convert Projects or Individual Files
 
